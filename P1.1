@@ -1,0 +1,104 @@
+import sys
+import random
+import datetime
+
+x=datetime.datetime.now()
+
+class bank():
+    def __init__(self, name, account_number, balance = 5000):
+        self.name = name
+        self.account_number = account_number
+        self.balance = balance
+
+    def account_detail(self):
+        print("\nYour Account Details are mentioned below")
+        print(f"\nAccount Holder Name: {self.name.upper()}")
+        print(f"Account Number: {self.account_number}")
+        print(f"Available balance: Rs.{self.balance}\n")
+
+    def deposit(self, amount):
+        self.amount = amount
+        self.balance = self.balance + self.amount
+        print("Current account balance:Rs. ", self.balance)
+        print()
+
+    def withdraw(self, amount):
+        self.amount = amount
+        if self.amount > self.balance:
+            print("Insufficient balance")
+            print(f"Your balance is Rs.{self.balance} only.")
+            print("Try with lesser amount than balance.")
+            print()
+        else:
+            self.balance = self.balance - self.amount
+            print(f"Rs.{amount} withdrawed!")
+            print("Current account balance: Rs.", self.balance)
+            print()
+
+    def check_balance(self):
+        print("Available balance: Rs.", self.balance)
+        print()
+
+    def transaction(self):
+        print("\n\nWhat would you like to do?"
+              "\n"
+              "1.Get your ACCOUNT DETAILS"
+              "\n2.DEPOSIT"
+              "\n3.WITHDRAW"
+              "\n4.CHECK BALANCE"
+              "\n5.EXIT the window"
+        )
+
+        while True:
+            try:
+                option = int(input("Enter 1, 2, 3, 4 or 5:"))
+            except ValueError:
+                print("Oops.Seems like an error. Please enter 1, 2, 3, 4, or 5 only!\n")
+                continue
+            else:
+                if option == 1:
+                    bank.account_detail()
+                elif option == 2:
+                    amount = int(input("How much you want to deposit(in Rs.):"))
+                    bank.deposit(amount)
+                elif option == 3:
+                    amount = int(input("How much you want to withdraw(in Rs.):"))
+                    bank.withdraw(amount)
+                elif option == 4:
+                    bank.check_balance()
+                elif option == 5:
+
+                    print("\n\n\t\t\t\t\tBANK OF LOS ANGELES")
+                    print("\t\t\tTransaction details on",x.strftime("%c"))
+                    print(f"""
+                                        
+                Transaction id: {random.randint(1000, 10000)} 
+                Account holder name: {self.name.upper()}                  
+                Account number: {self.account_number}                
+                Available balance: Rs.{self.balance}                    
+ 
+                Thank you.Visit again.
+                """)
+                    sys.exit()
+
+
+print("\t\tWelcome to BANK OF LOS ANGELES")
+print("\n\nCreate your account..")
+print("Please enter the following details-")
+name = input("Enter your name: ")
+account_number = input("Enter your account number: ")
+print(f'Congratulations {name}! Your account has been created with BANK OF LOS ANGELES\n')
+
+bank = bank(name,account_number)
+
+while True:
+    trans = input("Do you want to proceed further.\nType 'yes' for further operations.\nType 'no' for exiting")
+    if trans == "yes":
+        bank.transaction()
+    elif trans == "no":
+        print("\nThank you!Visit again.")
+        print("BANK OF LOS ANGELES")
+        break
+    else:
+        print("Oops! You are supposed to enter only 'yes' or 'no'\n")
+
